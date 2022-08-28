@@ -21,8 +21,11 @@ export class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.name !== this.state.name || prevState.page !== this.state.page) {
+    if (prevState.name !== this.state.name) {
       this.setState({ status: 'pending', arrayImage: [] })
+    }
+    if (prevState.name !== this.state.name || prevState.page !== this.state.page) {
+      this.setState({ status: 'pending', })
       fetch(`https://pixabay.com/api/?q=${this.state.name}&page=1&key=${KEY}&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12`)
         .then(res => res.json())
         .then(({ hits }) => {
